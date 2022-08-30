@@ -1,0 +1,15 @@
+#!/bin/bash
+
+options=""
+if [ -t 0 ]; then
+  options="${options} --tty"
+fi
+
+docker build --tag feature-test --quiet --file Dockerfile.dev . &> /dev/null &&
+docker run \
+  --rm${options} -i \
+  --net=host \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v $(pwd):$(pwd) \
+  -w $(pwd) \
+  feature-test "$@"

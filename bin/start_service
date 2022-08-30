@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+func start --verbose 1>/proc/1/fd/1 2>/proc/1/fd/2

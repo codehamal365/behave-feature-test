@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+
+  test-service:
+    build:
+      context: .
+      dockerfile: test-service/Dockerfile
+    command: sleep infinity
+    volumes:
+      - type: bind
+        source: ./bin/start_service
+        target: /workspace/start_service
+      - type: bind
+        source: ./bin/stop_service
+        target: /workspace/stop_service
+
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+

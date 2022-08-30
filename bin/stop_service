@@ -1,0 +1,6 @@
+#!/bin/bash
+
+apt-get update && \
+apt-get install -y procps
+kill -9 $(ps -ef | grep "func start" | grep -v grep | awk '{print $2}')
+kill -9 $(ps -ef | grep "worker.py" | grep -v grep | awk '{print $2}')
